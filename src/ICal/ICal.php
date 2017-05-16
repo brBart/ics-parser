@@ -1096,7 +1096,7 @@ class ICal
                                     $monthRecurringOffset = $recurringTimeZone->getOffset();
                                     $monthRecurringTimestamp += $monthRecurringOffset;
                                 }
-                                
+
                                 $eventStartDesc = "{$this->convertDayOrdinalToPositive($dayNumber, $weekday, $monthRecurringTimestamp)} {$this->weekdays[$weekday]} of "
                                     . date('F Y H:i:s', $recurringTimestamp);
                                 $eventStartTimestamp = strtotime($eventStartDesc);
@@ -1210,17 +1210,17 @@ class ICal
                                 foreach ($bymonths as $bymonth) {
                                     $eventStartDesc = "{$this->convertDayOrdinalToPositive($dayNumber, $weekday, $yearRecurringTimestamp)} {$this->weekdays[$weekday]}"
                                         . " of {$this->monthNames[$bymonth]} "
-                                        . gmdate('Y H:i:s', $yearRecurringTimestamp);
+                                        . date('Y H:i:s', $yearRecurringTimestamp);
                                     $eventStartTimestamp = strtotime($eventStartDesc);
 
                                     if (intval($rrules['BYDAY']) === 0) {
                                         $lastDayDesc = "last {$this->weekdays[$weekday]}"
                                             . " of {$this->monthNames[$bymonth]} "
-                                            . gmdate('Y H:i:s', $yearRecurringTimestamp);
+                                            . date('Y H:i:s', $yearRecurringTimestamp);
                                     } else {
                                         $lastDayDesc = "{$this->convertDayOrdinalToPositive($dayNumber, $weekday, $yearRecurringTimestamp)} {$this->weekdays[$weekday]}"
                                             . " of {$this->monthNames[$bymonth]} "
-                                            . gmdate('Y H:i:s', $yearRecurringTimestamp);
+                                            . date('Y H:i:s', $yearRecurringTimestamp);
                                     }
                                     $lastDayTimestamp = strtotime($lastDayDesc);
 
@@ -1269,7 +1269,8 @@ class ICal
                                                 }
                                             }
                                         }
-
+                                        // Not sure why there's an iteration per week on this
+                                        $lastDayTimestamp = $eventStartTimestamp;
                                         $eventStartTimestamp += self::SECONDS_IN_A_WEEK;
                                     } while ($eventStartTimestamp <= $lastDayTimestamp);
                                 }
