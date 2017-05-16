@@ -1090,7 +1090,7 @@ class ICal
 
                                 // Adjust time zone from initial event
                                 $monthRecurringOffset = 0;
-                                if ($this->useTimeZoneWithRRules || true) {
+                                if ($this->useTimeZoneWithRRules) {
                                     $recurringTimeZone = \DateTime::createFromFormat('U', $monthRecurringTimestamp);
                                     $recurringTimeZone->setTimezone($initialStart->getTimezone());
                                     $monthRecurringOffset = $recurringTimeZone->getOffset();
