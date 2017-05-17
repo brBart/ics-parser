@@ -1269,7 +1269,8 @@ class ICal
                                                 }
                                             }
                                         }
-                                        // Not sure why there's an iteration per week on this
+                                        // This fixes YEARLY BYSETPOS=1 where without this line, it would 
+                                        // put this event every single week, instead of once per year
                                         $lastDayTimestamp = $eventStartTimestamp;
                                         $eventStartTimestamp += self::SECONDS_IN_A_WEEK;
                                     } while ($eventStartTimestamp <= $lastDayTimestamp);
